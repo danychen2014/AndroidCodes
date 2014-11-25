@@ -1,0 +1,18 @@
+static SparseArray<String> eventNames = new SparseArray<String>();
+	
+	static {
+		try {
+			Field[] fields = MotionEvent.class.getDeclaredFields();
+			for(Field field : fields) {
+				field.setAccessible(true);
+				String name = field.getName();
+				if(name.startsWith("ACTION")) {
+//					System.out.println(name + field.getInt(null));
+				    eventNames.put(field.getInt(null), name);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
